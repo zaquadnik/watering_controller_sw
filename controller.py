@@ -6,8 +6,23 @@ from valvectrl import *
 #   23, 24, 25, 27
 
 RinserValve = Valve('Rinsers', 23)
+WateringValve = Valve('Watering', 24)
+
+ExampleWorkPlan = [[[time(10,00,00),time(10,15,00)],[time(19,00,00),time(19,15,00)]],   #Monday
+                   [[time(10,00,00),time(10,15,00)],[time(19,00,00),time(19,15,00)]],   #Tuesday
+                   [[time(10,00,00),time(10,15,00)],[time(19,00,00),time(19,15,00)]],   #Wednesday
+                   [[time(10,00,00),time(10,15,00)],[time(19,00,00),time(19,15,00)]],   #Thursday
+                   [[time(10,00,00),time(10,15,00)],[time(19,00,00),time(19,15,00)]],   #Friday
+                   [[time(10,00,00),time(10,15,00)],[time(19,00,00),time(19,15,00)]],   #Saturday
+                   [[time(10,00,00),time(10,15,00)],[time(19,00,00),time(19,15,00)]]]   #Sunday
+
+RinserValve.UpdateWorkPlan(ExampleWorkPlan)
+WateringValve.UpdateWorkPlan(ExampleWorkPlan)
+
 
 while True:
     sleep(1)
+    RinserValve.CheckTimeAndUpdate()
+    WateringValve.CheckTimeAndUpdate()
 
 
