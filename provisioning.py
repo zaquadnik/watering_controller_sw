@@ -31,13 +31,30 @@ class Settings:
 
 class Workplan:
     self.Workplan = []
+    self.DaysOfWeek = {'mon' : 0, 'tue' : 1, 'wed' : 2, 'thu': 3, 'fri' : 4, 'sat' : 5, 'sun' : 6}
+    self.WorkplanFilePath = ''
     def __init__(self, Path):
+        self.WorkplanFilePath = Path
+        self.ReloadWorkPlan()
+        
+    def GetWorkplan(self):
+        return self.WorkPlan
+    
+    def ReloadWorkplan(self):
         try:
-            WorkplanFile = open(Path)
+            WorkplanFile = open(self.WorkplanFilePath)
         except:
-            print("Error: Workplan file not found")
+            self.WorkplanFilePath = ''
+            print("Error: Workplan file not found or invalid file path")
         else:
             WorkplanCfg = json.load(WorkplanFile)
+            for Day in WorkplanCfg['day']:
+                i = self.DaysOfWeek[WorkplanCfg['day'][Day]]
+                DayPlan = list(WorkplanCfg['day'][Day].values())
+                for State in DayPlan:
+                    for Time in DayPlan[State]:
+                        WorkPlan[i][State][Time] = datetime.strptime(DayPlan[State][Time], '%H:%M').time()
         finally:
             WorkplanFile.close()
+        
         
