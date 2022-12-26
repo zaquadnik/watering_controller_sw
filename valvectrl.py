@@ -31,19 +31,18 @@ class Valve:
         self.Programmed = True
 
     def StateUpdate(self, ValveState):
-        match ValveState:
-            case CLOSED:
+            if ValveState == CLOSED:
                 self.ValveGpio.TurnOff()
                 self.ValveState = ValveState
-            case OPENED:
+            elif ValveState == OPENED:
                 self.ValveGpio.TurnOn()
                 self.ValveState = ValveState
-            case _:
+            else:
                 raise ValueError("Unable to change valve state.Not correct state value.")
 
     def CheckTimeAndUpdate(self):
         self.CurrentTime = datetime.now()
-        if self.Programmed == True
+        if self.Programmed == True:
             DayPlan = self.WorkPlan[self.CurrentTime.weekday()]
             LocalState = CLOSED
             # This loop checks whether current time is within one of working periods in day plan
@@ -52,6 +51,9 @@ class Valve:
                     LocalState = OPENED
                     break
             self.StateUpdate(LocalState)
+            
+    def GetState(self):
+        return self.ValveState
 
 
 

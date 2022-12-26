@@ -37,6 +37,9 @@ class Settings:
     
     def GetValveName(self, ValveIndex):
         return self.GetValveConfig(ValveIndex)[2]
+    
+    def GetPumpGpio(self):
+        return self.PumpGpioNum
         
 class Workplan:
     self.Workplan = []
