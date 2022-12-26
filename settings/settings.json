@@ -1,8 +1,8 @@
 {
 	"settings":{
-		"PumpGpioNum": 27,
-		
-	}
+        "NumOfValves": 3,
+		"PumpGpioNum": 27		
+	},
 	"ValveConfigs":[
 		{"GpioNum": 23,
 		 "PlanPath": "watering1.json"},
