@@ -4,10 +4,13 @@
 		"PumpGpioNum": 27		
 	},
 	"ValveConfigs":[
-		{"GpioNum": 23,
+		{"Name": "WateringValve",
+         "GpioNum": 23,
 		 "PlanPath": "watering1.json"},
-		{"GpioNum": 24,
+		{"Name": "Rinser1Valve",
+         "GpioNum": 24,
 		 "PlanPath": "rinser1.json"},
-		{"GpioNum": 25,
+		{"Name": "Rinser2Valve",
+         "GpioNum": 25,
 		 "PlanPath": "rinser2.json"}]
 }

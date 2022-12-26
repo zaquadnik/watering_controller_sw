@@ -27,8 +27,17 @@ class Settings:
             print("It's not valve you're looking for.")
         else:
             ValveCfg = self.ValveConfigs[ValveIndex]
-            return[ValveCfg['GpioNum'], ValveCfg['PlanPath']]
-
+            return[ValveCfg['GpioNum'], ValveCfg['PlanPath'], ValveCfg['Name']]
+        
+    def GetValveGpio(self, ValveIndex):
+        return self.GetValveConfig(ValveIndex)[0]
+    
+    def GetValveWorkplanPath(self, ValveIndex):
+        return self.GetValveConfig(ValveIndex)[1]
+    
+    def GetValveName(self, ValveIndex):
+        return self.GetValveConfig(ValveIndex)[2]
+        
 class Workplan:
     self.Workplan = []
     self.DaysOfWeek = {'mon' : 0, 'tue' : 1, 'wed' : 2, 'thu': 3, 'fri' : 4, 'sat' : 5, 'sun' : 6}

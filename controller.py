@@ -1,28 +1,22 @@
 from time import *
 from valvectrl import *
+from provisioning import *
 
 #Init valve control
 # GPIOs for valve control:
 #   23, 24, 25, 27
 
-RinserValve = Valve('Rinsers', 23)
-WateringValve = Valve('Watering', 24)
+Settings = Settings("settings/settings.json")
 
-ExampleWorkPlan = [[[time(10,00,00),time(10,15,00)],[time(19,00,00),time(19,15,00)]],   #Monday
-                   [[time(10,00,00),time(10,15,00)],[time(19,00,00),time(19,15,00)]],   #Tuesday
-                   [[time(10,00,00),time(10,15,00)],[time(19,00,00),time(19,15,00)]],   #Wednesday
-                   [[time(10,00,00),time(10,15,00)],[time(19,00,00),time(19,15,00)]],   #Thursday
-                   [[time(10,00,00),time(10,15,00)],[time(19,00,00),time(19,15,00)]],   #Friday
-                   [[time(10,00,00),time(10,15,00)],[time(19,00,00),time(19,15,00)]],   #Saturday
-                   [[time(10,00,00),time(10,15,00)],[time(19,00,00),time(19,15,00)]]]   #Sunday
+for ValveIndex in range(Settings.NumOfValves):
+    Valve[ValveIndex] = Valve(Settings.GetValveName(ValveIndex), Settings.GetValveGpio(ValveIndex))
+    Workplans[ValveIndex] = Workplan(Settings.GetValveWorkplanPath(ValveIndex))
+    Valve[ValveIndex].UpdateWorkPlan(Workplans[ValveIndex].GetWorkplan())
 
-RinserValve.UpdateWorkPlan(ExampleWorkPlan)
-WateringValve.UpdateWorkPlan(ExampleWorkPlan)
-
+#Add pump control & settings
 
 while True:
     sleep(1)
-    RinserValve.CheckTimeAndUpdate()
-    WateringValve.CheckTimeAndUpdate()
-
-
+    for ValveIndex in range(Settings.NumOfValves):
+        Valve[ValveIndex].CheckTimeAndUpdate()
+ 
