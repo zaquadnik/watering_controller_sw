@@ -20,15 +20,24 @@ class Settings:
             except KeyError:
                 print("Malformed configuration JSON") 
         finally:
-            Configuration.close()
+            JsonFile.close()
             
     def GetValveConfig(self, ValveIndex):
         if ValveIndex >= self.NumOfValves:
             print("It's not valve you're looking for.")
         else:
             ValveCfg = self.ValveConfigs[ValveIndex]
-            return[ValveCfg['GpioNum'], ValveVfg['PlanPath']]
+            return[ValveCfg['GpioNum'], ValveCfg['PlanPath']]
 
 class Workplan:
+    self.Workplan = []
     def __init__(self, Path):
+        try:
+            WorkplanFile = open(Path)
+        except:
+            print("Error: Workplan file not found")
+        else:
+            WorkplanCfg = json.load(WorkplanFile)
+        finally:
+            WorkplanFile.close()
         
