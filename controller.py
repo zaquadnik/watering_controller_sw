@@ -28,5 +28,5 @@ while True:
     if AcriveValves > 0:
         WaterPump.ChangeState(WORKING)
     else:
-        WaterPump.CHangeState(STOPPED)
+        WaterPump.ChangeState(STOPPED)
  
