@@ -65,7 +65,7 @@ class Workplan:
                 DayPlan = list(WorkplanCfg['day'][Day].values())
                 for State in DayPlan:
                     for Time in DayPlan[State]:
-                        WorkPlan[i][State][Time] = datetime.strptime(DayPlan[State][Time], '%H:%M').time()
+                        WorkPlan[i][Time][State] = datetime.strptime(DayPlan[State][Time], '%H:%M').time()
         finally:
             WorkplanFile.close()
         
