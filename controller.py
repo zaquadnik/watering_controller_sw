@@ -25,7 +25,7 @@ while True:
         Valve[ValveIndex].CheckTimeAndUpdate()
         if Valve[ValveIndex].GetState() == OPENED:
             ActiveValves += 1
-    if AcriveValves > 0:
+    if ActiveValves > 0:
         WaterPump.ChangeState(WORKING)
     else:
         WaterPump.ChangeState(STOPPED)
