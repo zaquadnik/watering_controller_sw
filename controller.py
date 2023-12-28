@@ -1,9 +1,20 @@
+import json
 from time import *
 from valvectrl import *
 
 #Init valve control
 # GPIOs for valve control:
 #   23, 24, 25, 27
+
+try:
+    CfgFile = open("settings/settings.json","r")
+    Config = json.load(CfgFile)
+except:
+    print("No config file found")
+finally:
+    CfgFile.close()
+
+
 
 RinserValve = Valve('Rinsers', 23)
 WateringValve = Valve('Watering', 24)
