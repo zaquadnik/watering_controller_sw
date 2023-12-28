@@ -1,5 +1,6 @@
 {
 	"settings":{
+<<<<<<< HEAD
 		"PumpGpioNum": 27	
 	},
 	"ValveConfigs":[
@@ -16,4 +17,19 @@
 			"PlanPath": "rinser2.json"
 		}
 	]
+=======
+        "NumOfValves": 3,
+		"PumpGpioNum": 27		
+	},
+	"ValveConfigs":[
+		{"Name": "WateringValve",
+         "GpioNum": 23,
+		 "PlanPath": "watering1.json"},
+		{"Name": "Rinser1Valve",
+         "GpioNum": 24,
+		 "PlanPath": "rinser1.json"},
+		{"Name": "Rinser2Valve",
+         "GpioNum": 25,
+		 "PlanPath": "rinser2.json"}]
+>>>>>>> bfdb964f6a095635c25b7f5701d86962325f7d42
 }
