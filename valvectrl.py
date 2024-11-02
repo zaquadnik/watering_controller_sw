@@ -1,8 +1,10 @@
 from relay import *
 from datetime import *
-
-OPENED = 1
-CLOSED = 0
+from enum import Enum 
+ 
+class vState(Enum):
+    OPENED = 1
+    CLOSED = 0
 
 #----------------------------------------------------------------------------
 # WorkPlan is arranged as list indexed by the day of week. Each day contains
@@ -16,7 +18,7 @@ CLOSED = 0
 class Valve:
     def __init__(self, Name, GpioNum):
         self.name = Name
-        self.ValveState = CLOSED
+        self.ValveState = vState.CLOSED
         self.CurrentTime = datetime.now()
         self.Programmed = False
         self.WorkPlan = []              #WorkPlan as list to contain planned ons and offs
@@ -31,10 +33,10 @@ class Valve:
         self.Programmed = True
 
     def StateUpdate(self, ValveState):
-            if ValveState == CLOSED:
+            if ValveState == vState.CLOSED:
                 self.ValveGpio.TurnOff()
                 self.ValveState = ValveState
-            elif ValveState == OPENED:
+            elif ValveState == vState.OPENED:
                 self.ValveGpio.TurnOn()
                 self.ValveState = ValveState
             else:
@@ -44,11 +46,11 @@ class Valve:
         self.CurrentTime = datetime.now()
         if self.Programmed == True:
             DayPlan = self.WorkPlan[self.CurrentTime.weekday()]
-            LocalState = CLOSED
+            LocalState = vState.CLOSED
             # This loop checks whether current time is within one of working periods in day plan
             for i in DayPlan:
                 if self.CurrentTime.time() >= DayPlan[i][0] and self.CurrentTime.time() < DayPlan[i][1]:
-                    LocalState = OPENED
+                    LocalState = vState.OPENED
                     break
             self.StateUpdate(LocalState)
             
