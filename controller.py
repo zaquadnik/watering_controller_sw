@@ -10,7 +10,7 @@ from provisioning import *
 Settings = Settings("settings/settings.json")
 
 WaterPump = Pump(Settings.GetPumpGpio())
-WaterPump.ChangeState(STOPPED)
+WaterPump.ChangeState(pState.STOPPED)
 
 for ValveIndex in range(Settings.NumOfValves):
     Valve[ValveIndex] = Valve(Settings.GetValveName(ValveIndex), Settings.GetValveGpio(ValveIndex))
@@ -23,10 +23,10 @@ while True:
     ActiveValves = 0
     for ValveIndex in range(Settings.NumOfValves):
         Valve[ValveIndex].CheckTimeAndUpdate()
-        if Valve[ValveIndex].GetState() == OPENED:
+        if Valve[ValveIndex].GetState() == vState.OPENED:
             ActiveValves += 1
     if ActiveValves > 0:
-        WaterPump.ChangeState(WORKING)
+        WaterPump.ChangeState(pState.WORKING)
     else:
-        WaterPump.ChangeState(STOPPED)
+        WaterPump.ChangeState(pState.STOPPED)
  
